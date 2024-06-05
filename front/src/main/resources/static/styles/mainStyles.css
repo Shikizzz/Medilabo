@@ -1,0 +1,54 @@
+a {
+    text-decoration: none;
+    color: black;
+}
+
+body{
+    margin:0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.page_container{
+    width : 70%;
+    margin: 3em auto;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.page_title{
+    font-size: 3em;
+    margin: 1em auto;
+    font-weight: 500;
+}
+
+.page_subtitle{
+    font-size: 2em;
+        margin: 1em auto;
+        font-weight: 500;
+}
+
+.button{
+    width : fit-content;
+    color: white;
+    border-radius : 0.5em;
+    background-color: #3b68d9;
+    margin : 2.5em auto;
+    padding: 0.5em 1em;
+}
+.button_text{
+    color: white;
+}
+.button:hover, .submit:hover{
+    background-color: #588aed;
+    cursor: pointer;
+}
+
+.submit{
+    width : fit-content;
+    padding: 0.5em 1em;
+    color: white;
+    border-radius : 0.5em;
+    background-color: #3b68d9;
+    margin : 1em auto;
+}

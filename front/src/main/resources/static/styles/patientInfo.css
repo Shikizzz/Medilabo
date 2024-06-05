@@ -1,0 +1,33 @@
+table{
+    width: 50%;
+    margin : auto;
+}
+
+th{
+    width: 35%;
+    text-align: left;
+    font-weight: 400;
+}
+
+td{
+    width: 65%;
+    text-align: left;
+}
+
+.name{
+    font-weight: 600;
+}
+
+.delete{
+    width : fit-content;
+    color: white;
+    border-radius : 0.5em;
+    background-color: #b0001b;
+    margin : 2.5em auto;
+    padding: 0.5em 1em;
+}
+
+.delete:hover{
+    background-color: #c74c5f;
+    cursor: pointer;
+}

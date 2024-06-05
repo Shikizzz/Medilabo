@@ -1,0 +1,32 @@
+.search_form{
+    display: ruby;
+}
+.search_elmt{
+    margin: 0 0.5em;
+}
+
+.patient_link{
+    color: #0000EE;
+}
+
+table{
+    width: 100%;
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+th{
+    background-color: #555555;
+    font-size: 1.1em;
+    color: white;
+    padding: 0.8em;
+}
+
+td{
+    width: 25%;
+    padding: 0.3em;
+    border: 1px solid #ccc;
+}
+.even_row{
+    background-color: #eeeeee;
+}

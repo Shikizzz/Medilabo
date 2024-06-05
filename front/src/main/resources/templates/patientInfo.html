@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>PatientInfo</title>
+    <link th:href="@{/styles/mainStyles.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/patientInfo.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="page_container">
+    <h1 class="page_title">Patient Informations:</h1>
+        <table>
+            <tr>
+                <th class="name">Name :</th>
+                <td class="name" th:text="|${#strings.toUpperCase(patient.lastname)} ${patient.firstname}|" />
+            </tr>
+            <tr>
+                <th>Genre :</th>
+                <td th:text="${#strings.capitalize(#strings.toLowerCase(patient.genre))}" />
+            </tr>
+            <tr>
+                <th>Address :</th>
+                <td th:text="${patient.address}" />
+            </tr>
+            <tr>
+                <th>Phone Number :</th>
+                <td th:text="${patient.phoneNumber}" />
+            </tr>
+        </table>
+
+    <div class="button">
+        <a class="button_text" th:href="@{/editPatient?id={id}(id=${patient.id})}"> Edit Patient </a>
+    </div>
+    <p class="delete">
+        <a class="button_text" onclick="confirmPopup()" th:href="@{/deletePatient?id={id}(id=${patient.id})}">Delete Patient</a>
+    </p>
+
+    <script>
+    function confirmPopup() {
+        confirm("Are you sure you want to delete this patient ?");
+    }
+    </script>
+
+</div>
+</body>
+</html>

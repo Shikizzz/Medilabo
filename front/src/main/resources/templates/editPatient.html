@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Patient</title>
+    <link th:href="@{/styles/mainStyles.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="page_container">
+    <h1 class="page_title">Edit Patient</h1>
+    <form method="post" modelAttribute="patientInfo" th:action="@{/editPatient}" th:object="${PatientDTO}">
+        <p th:text="${patient.firstname}"></p><br>
+        <p th:text="${patient.lastname}"></p><br>
+        <p th:text="${patient.birthdate}"></p><br>
+        <input type="radio" id="male" name="genre" path="*{genre}" value="MALE" th:checked="${true}" required>
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="genre" path="*{genre}" value="FEMALE"
+               th:checked="${patient.genre.equals(FEMALE)}">
+        <label for="female">Female</label>
+        <input type="radio" id="other" name="genre" path="*{genre}" value="OTHER"
+               th:checked="${patient.genre.equals(OTHER)}">
+        <label for="other">Other</label><br>
+        <input type="text" name="address" path="*{address}" th:value="${patient.address}"><br>
+        <input type="text" name="phoneNumber" path="*{phoneNumber}" th:value="${patient.phoneNumber}"><br>
+
+        <input type="hidden" th:field="${patient.firstname}" >
+        <input type="hidden" th:field="${patient.lastname}">
+        <input type="hidden" th:field="${patient.birthdate}">
+
+        <input class="submit" type="submit" value="Edit Patient">
+    </form>
+</div>
+</body>
+</html>

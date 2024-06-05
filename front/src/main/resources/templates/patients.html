@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Patients</title>
+    <link th:href="@{/styles/mainStyles.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/patients.css}" rel="stylesheet"/>
+</head>
+
+<body>
+<div class="page_container">
+
+    <h1 class="page_title">Patients</h1>
+    <div class="button">
+        <a class="button_text" th:href="@{/addPatient}"> Add New Patient </a>
+    </div>
+
+    <div>
+        <form class="search_form" method="post" modelAttribute="search" th:action="@{/patients}" th:object="${String}">
+            <label class= for="search">Search Patient: </label>
+            <input class="search_elmt" id="search" type="search" name="search" path="*{search}" placeholder="Enter Name">
+            <input class="submit" type="submit" value="Search Name">
+        </form>
+        <table>
+            <thead>
+            <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Birthdate</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="patient, iStat : ${patients}"
+                th:class="${iStat.even}? 'even_row'"
+                th:alt-title="${iStat.even}? 'even' : 'odd'">
+                <td th:text="${patient.firstname}"/>
+                <td th:text="${patient.lastname}"/>
+                <td th:text="${patient.birthdate}"/>
+                <td><a class="patient_link" th:href="@{/patientInfo?id={id}(id=${patient.id})}">See Full Information</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
