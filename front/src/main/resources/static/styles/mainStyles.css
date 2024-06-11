@@ -9,6 +9,10 @@ body{
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.error{
+    color: red;
+}
+
 .page_container{
     width : 70%;
     margin: 3em auto;
@@ -33,7 +37,7 @@ body{
     color: white;
     border-radius : 0.5em;
     background-color: #3b68d9;
-    margin : 2.5em auto;
+    margin : 1em auto;
     padding: 0.5em 1em;
 }
 .button_text{
@@ -51,4 +55,9 @@ body{
     border-radius : 0.5em;
     background-color: #3b68d9;
     margin : 1em auto;
+}
+
+input{
+    padding: 0.2em;
+    font-size: 0.8em;
 }

@@ -4,24 +4,28 @@
     <meta charset="UTF-8">
     <title>Add Patient</title>
     <link th:href="@{/styles/mainStyles.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/addPatient.css}" rel="stylesheet"/>
 </head>
 <body>
 <div class="page_container">
 
     <h1 class="page_title">New Patient</h1>
 
+    <p th:if="${invalidPatientError}" class="error">Invalid Patient. Please verify all fields</p>
+
     <form method="post" modelAttribute="patientInfo" th:action="@{/addPatient}" th:object="${PatientDTO}">
-        <input type="text" name="lastname" path="*{lastname}" placeholder="Lastname" required><br>
-        <input type="text" name="firstname" path="*{firstname}" placeholder="Firstname" required><br>
-        <input type="date" name="birthdate" path="*{birthdate}" placeholder="Birthdate" required><br>
+        <input class="rectangle" type="text" name="lastname" path="*{lastname}" placeholder="Lastname" required><br>
+        <input class="rectangle" type="text" name="firstname" path="*{firstname}" placeholder="Firstname" required><br>
+        <input class="rectangle" type="date" name="birthdate" path="*{birthdate}" placeholder="Birthdate" required><br>
         <input type="radio" id="male" name="genre" path="*{genre}" value="MALE" required>
         <label for="male">Male</label>
         <input type="radio" id="female" name="genre" path="*{genre}" value="FEMALE">
         <label for="female">Female</label>
         <input type="radio" id="other" name="genre" path="*{genre}" value="OTHER">
         <label for="other">Other</label><br>
-        <input type="text" name="address" path="*{address}" placeholder="Address"><br>
-        <input type="text" name="phoneNumber" path="*{address}" placeholder="Phone"><br>
+        <input class="rectangle" type="text" name="address" path="*{address}" placeholder="Address"><br>
+        <input class="rectangle" type="text" name="phoneNumber" path="*{address}" placeholder="Phone"><br>
+        <p th:if="${dateError}" class="error">Invalid date</p>
 
         <input class="submit" type="submit" value="Create Patient">
     </form>
