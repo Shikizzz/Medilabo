@@ -1,0 +1,30 @@
+
+server:
+  port: 9000
+
+
+spring:
+  application.name: auth-server
+  datasource:
+    url: jdbc:mysql://localhost:3306/medilabo?serverTimezone=UTC
+    username: root
+  security:
+    oauth2:
+      authorizationserver:
+        client:
+          medilabo-client:
+            registration:
+              client-id: medilabo-client
+              client-secret: "{noop}secret"
+              client-name: Medilabo Client
+              client-authentication-methods:
+                - client_secret_basic
+              authorization-grant-types:
+                - authorization_code
+                - refresh_token
+              redirect-uris:
+                - http://127.0.0.1:8082/login/oauth2/code/medilabo-client-oidc
+                - http://127.0.0.1:8082/authorized
+              scopes:
+                - openid
+                - patients.crud

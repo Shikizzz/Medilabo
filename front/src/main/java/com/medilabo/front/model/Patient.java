@@ -3,7 +3,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 
 import java.time.LocalDate;
-//@JsonIgnoreProperties(ignoreUnknown = true)
 public class Patient {
     @NotNull
     private Integer id;

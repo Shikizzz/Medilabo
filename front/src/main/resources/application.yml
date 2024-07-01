@@ -1,0 +1,29 @@
+
+server:
+  port: 8082
+
+spring:
+  application.name: medilabo-client
+  security:
+    oauth2:
+      client:
+        registration:
+          medilabo-client-oidc:
+            provider: spring
+            client-id: medilabo-client
+            client-secret: secret
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://127.0.0.1:8082/login/oauth2/code/{registrationId}"
+            scope: openid
+            client-name: medilabo-client-oidc
+          medilabo-client-authorization-code:
+            provider: spring
+            client-id: medilabo-client
+            client-secret: secret
+            authorization-grant-type: authorization_code
+            redirect-uri: "http://127.0.0.1:8082/authorized"
+            scope: patients.crud
+            client-name: medilabo-client-authorization-code
+        provider:
+          spring:
+            issuer-uri: http://auth-server:9000

@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link th:href="@{/styles/mainStyles.css}" rel="stylesheet"/>
 </head>
 <body>
-
+<div class="page_container">
+    <h1 class="title">Medilabo</h1>
+    <p th:if="${loginError}" class="error">Wrong Email or Password</p>
+    <form method="post" modelAttribute="user" th:action="@{/login}" th:object="${user}" >
+        <input type="text" id="username" name="username" path="*{username}"  placeholder="Username"><br>
+        <input type="password" id="password" name="password" path="*{password}"  placeholder="Password"><br>
+        <input class="submit" type="submit" value="Login">
+    </form>
+</div>
 </body>
 </html>
