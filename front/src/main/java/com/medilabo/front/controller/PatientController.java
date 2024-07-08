@@ -1,12 +1,13 @@
 package com.medilabo.front.controller;
 
+import com.medilabo.front.model.Note;
 import com.medilabo.front.model.Patient;
 import com.medilabo.front.model.PatientDTO;
+import com.medilabo.front.service.NoteService;
 import com.medilabo.front.service.PatientService;
 import com.medilabo.front.service.PatientServiceWebClient;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
-import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,13 +16,14 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-import org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient;
 
 @Controller
 public class PatientController {
-    private PatientServiceWebClient patientService;
-    public PatientController(PatientServiceWebClient patientService) {
+    private PatientService patientService;
+    private NoteService noteService;
+    public PatientController(PatientService patientService, NoteService noteService) {
         this.patientService = patientService;
+        this.noteService = noteService;
     }
 
     @GetMapping(value= {"/"})
@@ -30,13 +32,13 @@ public class PatientController {
     }
 
     @GetMapping("/patients")
-    public String getPatients(@RequestParam Optional<String> search, @RequestParam Optional<String> error, Model model,
-                              @RegisteredOAuth2AuthorizedClient("medilabo-client-authorization-code") OAuth2AuthorizedClient authorizedClient) {
+    public String getPatients(@RequestParam Optional<String> search, @RequestParam Optional<String> error, Model model
+                              /*@RegisteredOAuth2AuthorizedClient("medilabo-client-authorization-code") OAuth2AuthorizedClient authorizedClient*/) {
         if (error.isPresent()) {
             model.addAttribute("illegalArgumentError", true);
         }
         if(search.isPresent()) {
-            List<Patient> patients = patientService.getPatientsListBySearchedString(authorizedClient, search.get());
+            List<Patient> patients = patientService.getPatientsListBySearchedString(search.get());
             if(patients.size()>0){
                 model.addAttribute("patients", patients);
             }
@@ -59,7 +61,7 @@ public class PatientController {
         }
         return "addPatient.html";
     }
- /*   @PostMapping("/addPatient")
+    @PostMapping("/addPatient")
     public String postAddPatient(@Valid @ModelAttribute(name = "patientInfo") PatientDTO patient, Model model, HttpSession session) throws IOException {
         patientService.postPatient(patient);
         return "redirect:patients";
@@ -70,6 +72,8 @@ public class PatientController {
         try{
             Patient patient = patientService.getPatientById(id);
             model.addAttribute(patient);
+            List<Note> notes = noteService.getNotesByPatientId(id);
+            model.addAttribute("notes", notes);
         }
         catch (IllegalArgumentException e){
             return "redirect:patients?error=illegalArgument";
@@ -89,7 +93,6 @@ public class PatientController {
     }
     @PostMapping("/editPatient")
     public String putEditPatient(@Valid @ModelAttribute(name = "patientInfo") PatientDTO patientDTO, HttpSession session) throws IOException {
-
         patientService.putPatient(patientDTO);
         return "redirect:patients";
     }
@@ -104,5 +107,5 @@ public class PatientController {
     public String handleValidationErrors() {
         return "redirect:addPatient?error=invalid";
     }
-*/
+
 }

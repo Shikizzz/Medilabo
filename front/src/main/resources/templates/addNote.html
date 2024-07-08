@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Note</title>
+    <link th:href="@{/styles/mainStyles.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/addNote.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="page_container">
+
+    <div th:insert="navbar :: navbar">  </div>
+
+    <h1 class="page_title">New Note</h1>
+
+    <form method="post" modelAttribute="note" th:action="@{/addNote?id={id}(id=${id})}" th:object="${Note}">
+
+      <input type="text" name="doctor" path="*{doctor}" placeholder="Doctor's Name"><br>
+      <textarea rows="10" cols="40" name="content" path="*{content}" placeholder="Type the Note here"></textarea>
+
+      <input class="submit" type="submit" value="Add Note">
+    </form>
+</div>
+</body>
+</html>

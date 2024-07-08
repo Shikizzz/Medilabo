@@ -17,7 +17,7 @@ import java.util.List;
 
 @Service
 public class PatientService {
-    private final String apiUrl = "http://localhost:8080/patient";
+    private final String apiUrl = "http://localhost:8081/patient";
 
 
  /*   public RestTemplate setRestTemplate(){

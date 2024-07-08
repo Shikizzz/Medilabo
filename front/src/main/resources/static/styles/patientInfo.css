@@ -19,12 +19,18 @@ td{
     font-weight: 600;
 }
 
+.buttons_container{
+    display : flex;
+    width: 100%;
+    justify-content: center;
+}
+
 .delete{
     width : fit-content;
     color: white;
     border-radius : 0.5em;
     background-color: #b0001b;
-    margin : 1.5em auto;
+    margin : 1em;
     padding: 0.5em 1em;
 }
 
@@ -32,3 +38,30 @@ td{
     background-color: #c74c5f;
     cursor: pointer;
 }
+
+.button{
+    height: fit-content;
+    margin: 1em;
+}
+
+#addNote{
+    margin: auto auto 1em;
+}
+
+.notes_table{
+    border : 1px solid;
+    border-collapse: collapse;
+}
+
+.metadata{
+    border : 1px dashed;
+}
+
+.row_title{
+    padding: 0.3em;
+}
+
+.content{
+    width : 100%;
+}
+

@@ -15,7 +15,7 @@ body{
 
 .page_container{
     width : 70%;
-    margin: 3em auto;
+    margin: 1em auto;
     text-align: center;
     font-size: 1.2em;
 }
@@ -60,4 +60,17 @@ body{
 input{
     padding: 0.2em;
     font-size: 0.8em;
+}
+
+.navbar{
+    text-align: left;
+}
+
+.menu_button{
+     padding: 0.8em 1em;
+     margin: 1em;
+     color: white;
+     border-radius: 0.5em;
+     background-color: #566573;
+     font-weight: 500;
 }

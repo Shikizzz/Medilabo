@@ -1,5 +1,5 @@
 package com.medilabo.front.config;
-
+/*
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,11 +15,11 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import static org.springframework.security.config.Customizer.withDefaults;
-
-@Configuration
-@EnableWebSecurity
+*/
+//@Configuration
+//@EnableWebSecurity
 public class SecurityConfig {
-    @Bean
+   /* @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authorizeRequests ->
@@ -55,7 +55,7 @@ public class SecurityConfig {
         authorizedClientManager.setAuthorizedClientProvider(authorizedClientProvider);
 
         return authorizedClientManager;
-    }
+    }*/
 
 }
 

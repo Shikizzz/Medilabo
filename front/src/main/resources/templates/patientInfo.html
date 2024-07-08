@@ -2,42 +2,74 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>PatientInfo</title>
+    <title>Patient Informations</title>
     <link th:href="@{/styles/mainStyles.css}" rel="stylesheet"/>
     <link th:href="@{/styles/patientInfo.css}" rel="stylesheet"/>
 </head>
 <body>
 <div class="page_container">
-    <h1 class="page_title">Patient Informations:</h1>
-        <table>
-            <tr>
-                <th class="name">Name :</th>
-                <td class="name" th:text="|${#strings.toUpperCase(patient.lastname)} ${patient.firstname}|" />
-            </tr>
-            <tr>
-                <th>Genre :</th>
-                <td th:text="${#strings.capitalize(#strings.toLowerCase(patient.genre))}" />
-            </tr>
-            <tr>
-                <th>Address :</th>
-                <td th:text="${patient.address}" />
-            </tr>
-            <tr>
-                <th>Phone Number :</th>
-                <td th:text="${patient.phoneNumber}" />
-            </tr>
-        </table>
 
-    <div class="button">
-        <a class="button_text" th:href="@{/editPatient?id={id}(id=${patient.id})}"> Edit Patient </a>
+    <div th:insert="navbar :: navbar">  </div>
+
+    <h1 class="page_title">Patient Informations:</h1>
+    <table>
+        <tr>
+            <th class="name">Name :</th>
+            <td class="name" th:text="|${#strings.toUpperCase(patient.lastname)} ${patient.firstname}|" />
+        </tr>
+        <tr>
+            <th>Genre :</th>
+            <td th:text="${#strings.capitalize(#strings.toLowerCase(patient.genre))}" />
+        </tr>
+        <tr>
+            <th>Address :</th>
+            <td th:text="${patient.address}" />
+        </tr>
+        <tr>
+            <th>Phone Number :</th>
+            <td th:text="${patient.phoneNumber}" />
+        </tr>
+    </table>
+    <div class ="buttons_container">
+        <div class="button">
+            <a class="button_text" th:href="@{/editPatient?id={id}(id=${patient.id})}"> Edit Patient </a>
+        </div>
+        <p class="delete">
+            <a class="button_text" th:href="@{/deletePatient?id={id}(id=${patient.id})}" onclick="return confirmPopup()">Delete Patient</a>
+        </p>
     </div>
-    <p class="delete">
-        <a class="button_text" onclick="confirmPopup()" th:href="@{/deletePatient?id={id}(id=${patient.id})}">Delete Patient</a>
+
+    <h1 class="page_title">Patient Notes:</h1>
+
+    <p class="button" id="addNote">
+        <a class="button_text" th:href="@{/addNote?id={id}(id=${patient.id})}">Add Note</a>
     </p>
+
+    <table>
+        <tr th:if="${notes.isEmpty()}">
+            <td> No Notes for now </td>
+        </tr>
+        <tr th:each="note : ${notes}">
+            <table class="notes_table">
+                <tr class="metadata">
+                    <th class="row_title">Date :</th>
+                    <td th:text="${note.date}" />
+                </tr>
+                <tr class="metadata">
+                    <th class="row_title">Doctor :</th>
+                    <td th:text="${note.doctor}" />
+                </tr>
+                <tr>
+                    <td class="content" th:text="${note.content}" />
+                </tr>
+            </table>
+        </tr>
+    </table>
+
 
     <script>
     function confirmPopup() {
-        confirm("Are you sure you want to delete this patient ?");
+        return confirm("Are you sure you want to delete this patient ?");
     }
     </script>
 

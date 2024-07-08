@@ -8,6 +8,9 @@
 </head>
 <body>
 <div class="page_container">
+
+    <div th:insert="navbar :: navbar">  </div>
+
     <h1 class="page_title">Edit Patient</h1>
 
     <p class="info" th:text="${patient.lastname}"></p>

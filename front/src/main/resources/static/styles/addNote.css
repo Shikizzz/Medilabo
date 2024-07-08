@@ -1,0 +1,11 @@
+
+input{
+
+}
+
+textarea {
+  display: block;
+  margin: 1.5em auto;
+  padding: 0.2em;
+  font-size: 1em;
+}
