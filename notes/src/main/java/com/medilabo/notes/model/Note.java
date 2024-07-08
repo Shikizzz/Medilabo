@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public class Note {
     @Id
     private String id;
-    private Patient patient;
+    private Integer patientId;
     private LocalDate date;
     private String doctor;
     private String content;
@@ -45,19 +45,19 @@ public class Note {
         this.content = content;
     }
 
-    public Patient getPatient() {
-        return patient;
+    public Integer getPatientId() {
+        return patientId;
     }
 
-    public void setPatient(Patient patient) {
-        this.patient = patient;
+    public void setPatient(Integer patientId) {
+        this.patientId = patientId;
     }
 
     @Override
     public String toString() {
         return "Note{" +
                 "id='" + id + '\'' +
-                ", patient=" + patient +
+                ", patientId=" + patientId +
                 ", date=" + date +
                 ", doctor='" + doctor + '\'' +
                 ", content='" + content + '\'' +
