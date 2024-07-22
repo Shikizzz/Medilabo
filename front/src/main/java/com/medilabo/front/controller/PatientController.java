@@ -5,7 +5,7 @@ import com.medilabo.front.model.Patient;
 import com.medilabo.front.model.PatientDTO;
 import com.medilabo.front.service.NoteService;
 import com.medilabo.front.service.PatientService;
-import com.medilabo.front.service.PatientServiceWebClient;
+import com.medilabo.front.service.RiskService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -21,9 +21,11 @@ import java.util.Optional;
 public class PatientController {
     private PatientService patientService;
     private NoteService noteService;
-    public PatientController(PatientService patientService, NoteService noteService) {
+    private RiskService riskService;
+    public PatientController(PatientService patientService, NoteService noteService, RiskService riskService) {
         this.patientService = patientService;
         this.noteService = noteService;
+        this.riskService = riskService;
     }
 
     @GetMapping(value= {"/"})
@@ -32,8 +34,7 @@ public class PatientController {
     }
 
     @GetMapping("/patients")
-    public String getPatients(@RequestParam Optional<String> search, @RequestParam Optional<String> error, Model model
-                              /*@RegisteredOAuth2AuthorizedClient("medilabo-client-authorization-code") OAuth2AuthorizedClient authorizedClient*/) {
+    public String getPatients(@RequestParam Optional<String> search, @RequestParam Optional<String> error, Model model) {
         if (error.isPresent()) {
             model.addAttribute("illegalArgumentError", true);
         }
@@ -74,6 +75,8 @@ public class PatientController {
             model.addAttribute(patient);
             List<Note> notes = noteService.getNotesByPatientId(id);
             model.addAttribute("notes", notes);
+            String risk = riskService.getRisk(id);
+            model.addAttribute("risk", risk);
         }
         catch (IllegalArgumentException e){
             return "redirect:patients?error=illegalArgument";

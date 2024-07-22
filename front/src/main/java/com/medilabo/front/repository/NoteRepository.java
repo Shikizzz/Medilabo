@@ -11,7 +11,11 @@ import java.util.List;
 
 @Repository
 public class NoteRepository {
-    private final String apiUrl = "http://localhost:8083/note";
+    private final String apiUrl;
+
+    public NoteRepository(CustomProperties props) {
+        this.apiUrl=props.getGatewayURL()+"/note";
+    }
 
     public List<Note> getNotesByPatientId(Integer patientId){
         String url = apiUrl+"?id="+patientId.toString();
@@ -22,9 +26,7 @@ public class NoteRepository {
                 .retrieve()
                 .bodyToMono( new ParameterizedTypeReference<List<Note>>(){})
                 .block();
-
     }
-
 
     public void postNote(Note note) throws IOException {
         WebClient client = WebClient.builder()

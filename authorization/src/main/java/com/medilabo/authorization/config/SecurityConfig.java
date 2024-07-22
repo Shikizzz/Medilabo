@@ -11,10 +11,12 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
@@ -38,62 +40,61 @@ import java.util.UUID;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
-
+@SuppressWarnings("deprecation") //TODO : modify deprecated bean
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
-   /* @Order(Ordered.HIGHEST_PRECEDENCE)
-    public SecurityFilterChain authorizationServerDefaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
-        http.getConfigurer(OAuth2AuthorizationServerConfigurer.class).oidc(withDefaults());
-        return http
-                .formLogin(withDefaults())
-                .build();
-    }*/
-
     @Bean
     @Order(1)
-    SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http) throws Exception {
+    SecurityFilterChain asSecurityFilterChain(HttpSecurity http) throws Exception {
+
         OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
-        http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
-                .oidc(withDefaults()); // Enable OpenID Connect 1.0
-        return http.formLogin(withDefaults()).build();
+
+        return http
+                .getConfigurer(OAuth2AuthorizationServerConfigurer.class).oidc(withDefaults())
+                .and()
+                .exceptionHandling(e -> e
+                        .authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login")))
+                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
+                .build();
+
     }
 
     @Bean
     @Order(2)
-    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(authorizeRequests -> authorizeRequests.anyRequest()
-                        .authenticated())
-                .formLogin(withDefaults());
-        return http.build();
+    SecurityFilterChain appSecurityFilterChain(HttpSecurity http) throws Exception {
+        return http
+                .formLogin(withDefaults())
+                .authorizeHttpRequests(authorize ->authorize.anyRequest().authenticated())
+                .build();
+
     }
 
     @Bean
     UserDetailsService userDetailsService() {
-        //PasswordEncoder encoder = passwordEncoder();
-        UserDetails user = User.builder()
-                .username("admin")
-                .password("{noop}password")
-                //.passwordEncoder(encoder::encode)
+        var user1 = User.withUsername("user")
+                .password("password")
+                .roles("USER")
+                .authorities("read")
                 .build();
-        return new InMemoryUserDetailsManager(user);
+        return new InMemoryUserDetailsManager(user1);
     }
-/*
+
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    PasswordEncoder passwordEncoder() {
+        return NoOpPasswordEncoder.getInstance();
     }
 
     @Bean
     RegisteredClientRepository registeredClientRepository() {
         RegisteredClient registeredClient = RegisteredClient.withId(UUID.randomUUID().toString())
-                .clientId("gateway-client-oidc")
-                .clientSecret("my-secret")
-                .scope("patients.crud")
+                .clientId("client")
+                .clientSecret("secret")
+                .scope("read")
                 .scope(OidcScopes.OPENID)
-                .redirectUri("http://127.0.0.1:8080/login/oauth2/code/gateway-client-oidc")
+                .scope(OidcScopes.PROFILE)
+                .redirectUri("http://127.0.0.1:8080/login/oauth2/code/gateway")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
@@ -136,6 +137,6 @@ public class SecurityConfig {
             throw new IllegalStateException(ex);
         }
         return keyPair;
-    }*/
+    }
 
 }
