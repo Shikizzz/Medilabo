@@ -34,12 +34,13 @@ public class PatientController {
     }
 
     @GetMapping("/patients")
-    public String getPatients(@RequestParam Optional<String> search, @RequestParam Optional<String> error, Model model) {
+    public String getPatients(@RequestParam Optional<String> search, @RequestParam Optional<String> error, Model model, HttpSession session) {
         if (error.isPresent()) {
             model.addAttribute("illegalArgumentError", true);
         }
+        String token = session.getAttribute("token").toString();
         if(search.isPresent()) {
-            List<Patient> patients = patientService.getPatientsListBySearchedString(search.get());
+            List<Patient> patients = patientService.getPatientsListBySearchedString(search.get(), token);
             if(patients.size()>0){
                 model.addAttribute("patients", patients);
             }
@@ -63,19 +64,21 @@ public class PatientController {
         return "addPatient.html";
     }
     @PostMapping("/addPatient")
-    public String postAddPatient(@Valid @ModelAttribute(name = "patientInfo") PatientDTO patient, Model model, HttpSession session) throws IOException {
-        patientService.postPatient(patient);
+    public String postAddPatient(@Valid @ModelAttribute(name = "patientInfo") PatientDTO patient, HttpSession session) throws IOException {
+        String token = session.getAttribute("token").toString();
+        patientService.postPatient(patient, token);
         return "redirect:patients";
     }
 
     @GetMapping("/patientInfo")
     public String getPatient(@RequestParam Integer id, Model model, HttpSession session) {
+        String token = session.getAttribute("token").toString();
         try{
-            Patient patient = patientService.getPatientById(id);
+            Patient patient = patientService.getPatientById(id, token);
             model.addAttribute(patient);
-            List<Note> notes = noteService.getNotesByPatientId(id);
+            List<Note> notes = noteService.getNotesByPatientId(id, token);
             model.addAttribute("notes", notes);
-            String risk = riskService.getRisk(id);
+            String risk = riskService.getRisk(id, token);
             model.addAttribute("risk", risk);
         }
         catch (IllegalArgumentException e){
@@ -86,8 +89,8 @@ public class PatientController {
 
     @GetMapping("/editPatient")
     public String getEditPatient(@RequestParam Integer id, Model model, HttpSession session){
-
-        Patient patient = patientService.getPatientById(id);
+        String token = session.getAttribute("token").toString();
+        Patient patient = patientService.getPatientById(id, token);
         if(patient != null){
             model.addAttribute("patient", patient);
             return "editPatient.html";
@@ -96,13 +99,15 @@ public class PatientController {
     }
     @PostMapping("/editPatient")
     public String putEditPatient(@Valid @ModelAttribute(name = "patientInfo") PatientDTO patientDTO, HttpSession session) throws IOException {
-        patientService.putPatient(patientDTO);
+        String token = session.getAttribute("token").toString();
+        patientService.putPatient(patientDTO, token);
         return "redirect:patients";
     }
 
     @GetMapping("/deletePatient")
     public String deletePatient(@RequestParam Integer id, HttpSession session){
-        patientService.deletePatient(id);
+        String token = session.getAttribute("token").toString();
+        patientService.deletePatient(id, token);
         return "redirect:patients";
     }
 

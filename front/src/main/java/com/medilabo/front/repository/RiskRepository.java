@@ -11,12 +11,13 @@ public class RiskRepository {
         this.apiUrl=props.getGatewayURL()+"/risk";
     }
 
-    public String getRisk(Integer id){
+    public String getRisk(Integer id, String token){
         String url = apiUrl+"?id="+id.toString();
         WebClient client = WebClient.builder()
                 .baseUrl(url)
                 .build();
         return client.get()
+                .headers(h -> h.setBearerAuth(token))
                 .retrieve()
                 .bodyToMono( String.class)
                 .block();

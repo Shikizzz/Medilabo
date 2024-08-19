@@ -28,8 +28,9 @@ public class NoteController {
     }
 
     @GetMapping("/addNote")
-    public String getAddPatient(@RequestParam(name = "id") Integer id, Model model) {
-        Patient patient = patientService.getPatientById(id);
+    public String getAddPatient(@RequestParam(name = "id") Integer id, Model model, HttpSession session) {
+        String token = session.getAttribute("token").toString();
+        Patient patient = patientService.getPatientById(id, token);
         if(patient != null){
             model.addAttribute("id", id);
             return "addNote.html";
@@ -37,13 +38,14 @@ public class NoteController {
         return "redirect:patients?error=illegalArgument";
     }
     @PostMapping("/addNote")
-    public String postAddPatient(@RequestParam(name = "id") Integer id, @Valid @ModelAttribute(name = "note") Note note, Model model) throws IOException {
+    public String postAddPatient(@RequestParam(name = "id") Integer id, @Valid @ModelAttribute(name = "note") Note note, HttpSession session) throws IOException {
+        String token = session.getAttribute("token").toString();
         note.setDate(LocalDate.now());
         note.setPatientId(id);
         if(note.getDoctor()==""){
             note.setDoctor("Unknown");
         }
-        noteService.postNote(note);
+        noteService.postNote(note, token);
         return "redirect:patientInfo?id="+id.toString();
     }
 

@@ -2,12 +2,11 @@ package com.medilabo.risk.controller;
 
 import com.medilabo.risk.model.Risk;
 import com.medilabo.risk.service.RiskService;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,8 +21,8 @@ public class RiskController {
     }
 
     @GetMapping
-    public ResponseEntity getRisk(@RequestParam Integer id){
-        Risk risk = service.getRisk(id);
+    public ResponseEntity getRisk(@RequestParam Integer id, @RequestHeader(HttpHeaders.AUTHORIZATION) String token){
+        Risk risk = service.getRisk(id, token);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(risk);
     }

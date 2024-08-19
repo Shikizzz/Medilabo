@@ -18,23 +18,25 @@ public class PatientRepository {
         this.noteURL = props.getNoteURL();
     }
 
-    public Patient getPatient(Integer id){
+    public Patient getPatient(Integer id, String token){
         String url = patientURL+"?id="+id.toString();
         WebClient client = WebClient.builder()
                 .baseUrl(url)
                 .build();
         return client.get()
+                .headers(h -> h.setBearerAuth(token))
                 .retrieve()
                 .bodyToMono( Patient.class)
                 .block();
         }
 
-    public List<Note> getNotes(Integer patientId){
+    public List<Note> getNotes(Integer patientId, String token){
         String url = noteURL+"?id="+patientId.toString();
         WebClient client = WebClient.builder()
                 .baseUrl(url)
                 .build();
         return client.get()
+                .headers(h -> h.setBearerAuth(token))
                 .retrieve()
                 .bodyToMono( new ParameterizedTypeReference<List<Note>>(){})
                 .block();

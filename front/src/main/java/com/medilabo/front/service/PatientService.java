@@ -17,24 +17,24 @@ public class PatientService {
         this.patientRepository = patientRepository;
     }
 
-    public Patient getPatientById(Integer id){
-        return patientRepository.getPatientById(id);
+    public Patient getPatientById(Integer id, String token){
+        return patientRepository.getPatientById(id, token);
     }
 
-    public List<Patient> getPatientsListBySearchedString(String search){
-        return patientRepository.getPatientsListBySearchedString(search);
+    public List<Patient> getPatientsListBySearchedString(String search, String token){
+        return patientRepository.getPatientsListBySearchedString(search, token);
     }
 
-    public void postPatient(PatientDTO patient) throws IOException {
-        patientRepository.postPatient(patient);
+    public void postPatient(PatientDTO patient, String token) throws IOException {
+        patientRepository.postPatient(patient, token);
         }
 
-    public void putPatient(PatientDTO patient) throws IOException {
-        patientRepository.putPatient(patient);
+    public void putPatient(PatientDTO patient, String token) throws IOException {
+        patientRepository.putPatient(patient, token);
     }
 
-    public void deletePatient(Integer id){
-        patientRepository.deletePatient(id);
+    public void deletePatient(Integer id, String token){
+        patientRepository.deletePatient(id, token);
     }
 
 }

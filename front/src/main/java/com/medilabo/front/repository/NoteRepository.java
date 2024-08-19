@@ -17,22 +17,24 @@ public class NoteRepository {
         this.apiUrl=props.getGatewayURL()+"/note";
     }
 
-    public List<Note> getNotesByPatientId(Integer patientId){
+    public List<Note> getNotesByPatientId(Integer patientId, String token){
         String url = apiUrl+"?id="+patientId.toString();
         WebClient client = WebClient.builder()
                 .baseUrl(url)
                 .build();
         return client.get()
+                .headers(h -> h.setBearerAuth(token))
                 .retrieve()
                 .bodyToMono( new ParameterizedTypeReference<List<Note>>(){})
                 .block();
     }
 
-    public void postNote(Note note) throws IOException {
+    public void postNote(Note note, String token) throws IOException {
         WebClient client = WebClient.builder()
                 .baseUrl(apiUrl)
                 .build();
         String response = client.post()
+                .headers(h -> h.setBearerAuth(token))
                 .body(BodyInserters.fromValue(note))
                 .retrieve()
                 .bodyToMono(String.class)

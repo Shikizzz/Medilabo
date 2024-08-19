@@ -1,4 +1,4 @@
-package com.medilabo.gateway.config;
+package com.medilabo.gateway.service;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

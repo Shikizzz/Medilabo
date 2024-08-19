@@ -17,12 +17,12 @@ public class NoteService {
         this.repository = repository;
     }
 
-    public List<Note> getNotesByPatientId(Integer patientId){
-        return repository.getNotesByPatientId(patientId);
+    public List<Note> getNotesByPatientId(Integer patientId, String token){
+        return repository.getNotesByPatientId(patientId, token);
     }
 
 
-    public void postNote(Note note) throws IOException {
-        repository.postNote(note);
+    public void postNote(Note note, String token) throws IOException {
+        repository.postNote(note, token);
     }
 }
