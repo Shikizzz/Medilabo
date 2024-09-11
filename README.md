@@ -41,3 +41,16 @@ Some containers may fail to run, because mysql service is too long to be operati
 CONGRATULATIONS, the application is running.
 You can navigate it on your browser, at the URL http://localhost:8082
 You can login with "user" and "password" as credentials
+
+# Green code ideas
+
+- First, we need to note that the application is quite light :
+   Front-end is mminimal, no animations, no pictures, no videos, etc.
+   Back-end has no complex algorithm that could be long to process (no loops).
+   Java is one of the most energy-efficient languages.
+
+- NoSQL databases requires less processing power than relational ones, so we could switch our MySQL databases to MongoDB, even if it's not the best solution in term of programmation logic.
+
+- Chosing a good deployment option. A deployment on the cloud is very efficient. In that case, it could be interresting to choose a cloud provider that is respective for environment.
+
+- About security, I could have duplicated the code that checks JTW tokens in each backend microservice. Instead, securing the backends architecturally (with firewalls) prevents from making too many database calls.
