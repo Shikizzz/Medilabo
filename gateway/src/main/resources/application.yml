@@ -1,0 +1,35 @@
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gateway
+
+  datasource:
+    platform: mysql
+    initialization-mode: always
+#    url: jdbc:mysql://${database_host}:6666/jwt
+#    username: root
+#    password: rootroot
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+
+
+jwt:
+  secret: 5O78Muyb7ykbKtgzIlydPsNgPWVonWsxTWSikfnGwzk
+
+medilabo:
+  infoURL: http://info:8081
+  notesURL: http://notes:8083
+  riskURL: http://risk:8084
+
+
+
+

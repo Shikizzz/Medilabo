@@ -1,7 +1,5 @@
 package com.medilabo.info.controller;
 
-
-import com.medilabo.info.model.Genre;
 import com.medilabo.info.model.Patient;
 import com.medilabo.info.model.PatientDTO;
 import com.medilabo.info.service.PatientService;

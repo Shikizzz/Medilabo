@@ -1,0 +1,180 @@
+[{
+  "_id": {
+    "$oid": "6687e8b316e78d6cc0ad4585"
+  },
+  "patientId": 10,
+  "date": {
+    "$date": "2024-07-04T22:00:00.000Z"
+  },
+  "doctor": "",
+  "content": "Le patient déclare qu'il 'se sent très bien' Poids égal ou inférieur au poids recommandé",
+  "_class": "com.medilabo.notes.model.Note"
+},
+{
+  "_id": {
+    "$oid": "6687e8d016e78d6cc0ad4586"
+  },
+  "patientId": 11,
+  "date": {
+    "$date": "2024-07-04T22:00:00.000Z"
+  },
+  "doctor": "",
+  "content": "Le patient déclare qu'il ressent beaucoup de stress au travail Il se plaint également que son audition est anormale dernièrement",
+  "_class": "com.medilabo.notes.model.Note"
+},
+{
+  "_id": {
+    "$oid": "6687e90616e78d6cc0ad4587"
+  },
+  "patientId": 11,
+  "date": {
+    "$date": "2024-07-04T22:00:00.000Z"
+  },
+  "doctor": "Unknown",
+  "content": "Le patient déclare avoir fait une réaction aux médicaments au cours des 3 derniers mois Il remarque également que son audition continue d'être anormale",
+  "_class": "com.medilabo.notes.model.Note"
+},
+{
+  "_id": {
+    "$oid": "6687e91f16e78d6cc0ad4588"
+  },
+  "patientId": 12,
+  "date": {
+    "$date": "2024-07-04T22:00:00.000Z"
+  },
+  "doctor": "Unknown",
+  "content": "Le patient déclare qu'il fume depuis peu",
+  "_class": "com.medilabo.notes.model.Note"
+},
+{
+  "_id": {
+    "$oid": "6687e92616e78d6cc0ad4589"
+  },
+  "patientId": 12,
+  "date": {
+    "$date": "2024-07-04T22:00:00.000Z"
+  },
+  "doctor": "Unknown",
+  "content": "Le patient déclare qu'il est fumeur et qu'il a cessé de fumer l'année dernière Il se plaint également de crises d’apnée respiratoire anormales Tests de laboratoire indiquant un taux de cholestérol LDL élevé",
+  "_class": "com.medilabo.notes.model.Note"
+},
+{
+  "_id": {
+    "$oid": "6687e93416e78d6cc0ad458a"
+  },
+  "patientId": 13,
+  "date": {
+    "$date": "2024-07-04T22:00:00.000Z"
+  },
+  "doctor": "Unknown",
+  "content": "Le patient déclare qu'il lui est devenu difficile de monter les escaliers Il se plaint également d’être essoufflé Tests de laboratoire indiquant que les anticorps sont élevés Réaction aux médicaments",
+  "_class": "com.medilabo.notes.model.Note"
+},
+{
+  "_id": {
+    "$oid": "6687e93a16e78d6cc0ad458b"
+  },
+  "patientId": 13,
+  "date": {
+    "$date": "2024-07-04T22:00:00.000Z"
+  },
+  "doctor": "Unknown",
+  "content": "",
+  "_class": "com.medilabo.notes.model.Note"
+},
+{
+  "_id": {
+    "$oid": "6687e94216e78d6cc0ad458c"
+  },
+  "patientId": 13,
+  "date": {
+    "$date": "2024-07-04T22:00:00.000Z"
+  },
+  "doctor": "Unknown",
+  "content": "Le patient déclare qu'il a mal au dos lorsqu'il reste assis pendant longtemps",
+  "_class": "com.medilabo.notes.model.Note"
+},
+{
+  "_id": {
+    "$oid": "6687e94b16e78d6cc0ad458d"
+  },
+  "patientId": 13,
+  "date": {
+    "$date": "2024-07-04T22:00:00.000Z"
+  },
+  "doctor": "Unknown",
+  "content": "Le patient déclare avoir commencé à fumer depuis peu Hémoglobine A1C supérieure au niveau recommandé",
+  "_class": "com.medilabo.notes.model.Note"
+},
+{
+  "_id": {
+    "$oid": "6687e95216e78d6cc0ad458e"
+  },
+  "patientId": 13,
+  "date": {
+    "$date": "2024-07-04T22:00:00.000Z"
+  },
+  "doctor": "Unknown",
+  "content": "Taille, Poids, Cholestérol, Vertige et Réaction",
+  "_class": "com.medilabo.notes.model.Note"
+},
+{
+  "_id": {
+    "$oid": "6695090ae48ea7712926579f"
+  },
+  "patientId": 14,
+  "date": {
+    "$date": "2024-07-14T22:00:00.000Z"
+  },
+  "doctor": "Unknown",
+  "content": "Le patient déclare qu'il 'se sent très bien' Poids égal ou inférieur au poids recommandé",
+  "_class": "com.medilabo.notes.model.Note"
+},
+{
+  "_id": {
+    "$oid": "66950917e48ea771292657a0"
+  },
+  "patientId": 15,
+  "date": {
+    "$date": "2024-07-14T22:00:00.000Z"
+  },
+  "doctor": "Unknown",
+  "content": "Le patient déclare qu'il ressent beaucoup de stress au travail Il se plaint également que son audition est anormale dernièrement",
+  "_class": "com.medilabo.notes.model.Note"
+},
+{
+  "_id": {
+    "$oid": "6695091fe48ea771292657a1"
+  },
+  "patientId": 15,
+  "date": {
+    "$date": "2024-07-14T22:00:00.000Z"
+  },
+  "doctor": "Unknown",
+  "content": "Le patient déclare avoir fait une réaction aux médicaments au cours des 3 derniers mois Il remarque également que son audition continue d'être anormale",
+  "_class": "com.medilabo.notes.model.Note"
+},
+{
+  "_id": {
+    "$oid": "66950947e48ea771292657a2"
+  },
+  "patientId": 16,
+  "date": {
+    "$date": "2024-07-14T22:00:00.000Z"
+  },
+  "doctor": "Unknown",
+  "content": "Le patient déclare qu'il fume depuis peu",
+  "_class": "com.medilabo.notes.model.Note"
+},
+{
+  "_id": {
+    "$oid": "6695094fe48ea771292657a3"
+  },
+  "patientId": 16,
+  "date": {
+    "$date": "2024-07-14T22:00:00.000Z"
+  },
+  "doctor": "Unknown",
+  "content": "Le patient déclare qu'il est fumeur et qu'il a cessé de fumer l'année dernière Il se plaint également de crises d’apnée respiratoire anormales Tests de laboratoire indiquant un taux de cholestérol LDL élevé",
+  "_class": "com.medilabo.notes.model.Note"
+}]

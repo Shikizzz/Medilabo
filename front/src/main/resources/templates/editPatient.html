@@ -4,24 +4,27 @@
     <meta charset="UTF-8">
     <title>Edit Patient</title>
     <link th:href="@{/styles/mainStyles.css}" rel="stylesheet"/>
+    <link th:href="@{/styles/editPatient.css}" rel="stylesheet"/>
 </head>
 <body>
 <div class="page_container">
+
+    <div th:insert="~{navbar.html :: navbar}">  </div>
+
     <h1 class="page_title">Edit Patient</h1>
+
+    <p class="info" th:text="${patient.lastname}"></p>
+    <p class="info" th:text="${patient.firstname}"></p>
+    <p class="info" th:text="${patient.birthdate}"></p>
     <form method="post" modelAttribute="patientInfo" th:action="@{/editPatient}" th:object="${PatientDTO}">
-        <p th:text="${patient.firstname}"></p><br>
-        <p th:text="${patient.lastname}"></p><br>
-        <p th:text="${patient.birthdate}"></p><br>
-        <input type="radio" id="male" name="genre" path="*{genre}" value="MALE" th:checked="${true}" required>
+        <input class="info" type="radio" id="male" name="genre" path="*{genre}" value="MALE" th:checked="${patient.genre == 'MALE'}" required>
         <label for="male">Male</label>
-        <input type="radio" id="female" name="genre" path="*{genre}" value="FEMALE"
-               th:checked="${patient.genre.equals(FEMALE)}">
+        <input type="radio" id="female" name="genre" path="*{genre}" value="FEMALE" th:checked="${patient.genre == 'FEMALE'}">
         <label for="female">Female</label>
-        <input type="radio" id="other" name="genre" path="*{genre}" value="OTHER"
-               th:checked="${patient.genre.equals(OTHER)}">
+        <input type="radio" id="other" name="genre" path="*{genre}" value="OTHER" th:checked="${patient.genre == 'OTHER'}">
         <label for="other">Other</label><br>
-        <input type="text" name="address" path="*{address}" th:value="${patient.address}"><br>
-        <input type="text" name="phoneNumber" path="*{phoneNumber}" th:value="${patient.phoneNumber}"><br>
+        <input class="info" type="text" name="address" path="*{address}" th:value="${patient.address}"><br>
+        <input class="info" type="text" name="phoneNumber" path="*{phoneNumber}" th:value="${patient.phoneNumber}"><br>
 
         <input type="hidden" th:field="${patient.firstname}" >
         <input type="hidden" th:field="${patient.lastname}">

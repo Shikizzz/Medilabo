@@ -21,6 +21,8 @@
             <input class="search_elmt" id="search" type="search" name="search" path="*{search}" placeholder="Enter Name">
             <input class="submit" type="submit" value="Search Name">
         </form>
+        <p th:if="${illegalArgumentError}" class="error">Invalid Request</p>
+        <p th:if="${noPatientFoundError}" class="error">No Patient found with this Name</p>
         <table>
             <thead>
             <tr>

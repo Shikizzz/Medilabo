@@ -2,10 +2,8 @@ package com.medilabo.front.service;
 
 import com.medilabo.front.model.Patient;
 import com.medilabo.front.model.PatientDTO;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.*;
+import com.medilabo.front.repository.PatientRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.util.List;
@@ -13,44 +11,30 @@ import java.util.List;
 
 @Service
 public class PatientService {
-    private final String apiUrl = "http://localhost:8080/patient";
+    private PatientRepository patientRepository;
 
-    public Patient getPatientById(Integer id){
-        RestTemplate restTemplate = new RestTemplate();
-        String url = apiUrl + "?id=" + id;
-        return restTemplate.getForObject(url, Patient.class);
+    public PatientService(PatientRepository patientRepository) {
+        this.patientRepository = patientRepository;
     }
 
-    public List<Patient> getPatientsListBySearchedString(String search){
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<List<Patient>> response =
-                restTemplate.exchange(apiUrl + "/search?search="+search,
-                        HttpMethod.GET, null, new ParameterizedTypeReference<List<Patient>>() {
-                        });
-        List<Patient> patients = response.getBody();
-        return patients;
+    public Patient getPatientById(Integer id, String token){
+        return patientRepository.getPatientById(id, token);
     }
 
-    public void postPatient(PatientDTO patient) throws IOException {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        RestTemplate restTemplate = new RestTemplate();
-        HttpEntity<PatientDTO> request = new HttpEntity<PatientDTO>(patient, headers);
-        ResponseEntity<String> responseEntityStr = restTemplate.postForEntity(apiUrl, request, String.class);
+    public List<Patient> getPatientsListBySearchedString(String search, String token){
+        return patientRepository.getPatientsListBySearchedString(search, token);
+    }
+
+    public void postPatient(PatientDTO patient, String token) throws IOException {
+        patientRepository.postPatient(patient, token);
         }
 
-    public void putPatient(PatientDTO patient) throws IOException {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        RestTemplate restTemplate = new RestTemplate();
-        HttpEntity<PatientDTO> request = new HttpEntity<PatientDTO>(patient, headers);
-        ResponseEntity<String> responseEntityStr = restTemplate.exchange(apiUrl, HttpMethod.PUT, request, String.class);
+    public void putPatient(PatientDTO patient, String token) throws IOException {
+        patientRepository.putPatient(patient, token);
     }
 
-    public void deletePatient(Integer id){
-        RestTemplate restTemplate = new RestTemplate();
-        String url = apiUrl + "?id=" + id;
-        restTemplate.delete(url);
+    public void deletePatient(Integer id, String token){
+        patientRepository.deletePatient(id, token);
     }
 
 }
