@@ -34,9 +34,9 @@
         <div class="button">
             <a class="button_text" th:href="@{/editPatient?id={id}(id=${patient.id})}"> Edit Patient </a>
         </div>
-        <p class="delete">
+    <!--    <p class="delete">
             <a class="button_text" th:href="@{/deletePatient?id={id}(id=${patient.id})}" onclick="return confirmPopup()">Delete Patient</a>
-        </p>
+        </p>  -->
     </div>
 
     <h1 class="page_title">Patient Notes:</h1>
@@ -68,13 +68,13 @@
         </tr>
     </table>
 
-
-    <script>
-    function confirmPopup() {
-        return confirm("Are you sure you want to delete this patient ?");
-    }
-    </script>
-
+    <!--
+        <script>
+        function confirmPopup() {
+            return confirm("Are you sure you want to delete this patient ?");
+        }
+        </script>
+    -->
 </div>
 </body>
 </html>

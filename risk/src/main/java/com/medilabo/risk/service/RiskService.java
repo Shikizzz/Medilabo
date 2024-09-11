@@ -22,11 +22,11 @@ public class RiskService {
         this.repository = repository;
     }
 
-    public Risk getRisk(Integer id, String token){
-        Patient patient = repository.getPatient(id, token);
+    public Risk getRisk(Integer id){
+        Patient patient = repository.getPatient(id);
         Genre genre = patient.getGenre();
         int age = calculateAge(patient.getBirthdate());
-        int numberOfTerms = getNumberOfTerms(id, token);
+        int numberOfTerms = getNumberOfTerms(id);
         String patientType="";
         if(age>=30) {patientType="aged";}
         else if(genre.equals(MALE)){
@@ -63,8 +63,8 @@ public class RiskService {
         return period.getYears();
     }
 
-    private int getNumberOfTerms(Integer id, String token){
-        List<Note> notesWithMetadata = repository.getNotes(id, token);
+    private int getNumberOfTerms(Integer id){
+        List<Note> notesWithMetadata = repository.getNotes(id);
         List<String> notes = new ArrayList<>();
         notesWithMetadata.stream().forEach(note -> notes.add(note.getContent()));
         List<String> terms = Arrays.asList(

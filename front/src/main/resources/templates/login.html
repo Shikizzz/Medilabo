@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="page_container">
-    <h1 class="title">Medilabo</h1>
+    <h1 class="page_title">Medilabo</h1>
     <p th:if="${loginError}" class="error">Wrong Email or Password</p>
     <form method="post" modelAttribute="loginForm" th:action="@{/auth/login}" th:object="${loginForm}" >
         <input type="text" id="username" name="username" path="*{username}"  placeholder="Username"><br>
