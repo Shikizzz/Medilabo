@@ -12,7 +12,7 @@ public class RiskRepository {
     }
 
     public String getRisk(Integer id, String token){
-        String url = apiUrl+"?id="+id.toString();
+        String url = apiUrl+"?id="+id.toString()+"&token="+token;
         WebClient client = WebClient.builder()
                 .baseUrl(url)
                 .build();

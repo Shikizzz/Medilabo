@@ -66,8 +66,8 @@ services:
     networks:
       - my-network
     environment:
-      - medilabo.patientURL=http://info:8081/patient
-      - medilabo.noteURL=http://notes:8083/note
+      - medilabo.patientURL=http://gateway:8080/patient
+      - medilabo.noteURL=http://gateway:8080/note
 
   ### MySQL Container
   mysqldb:
