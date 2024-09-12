@@ -9,9 +9,9 @@ spring:
   datasource:
     platform: mysql
     initialization-mode: always
-#    url: jdbc:mysql://${database_host}:6666/jwt
-#    username: root
-#    password: rootroot
+    url: jdbc:mysql://localhost:3306/jwt
+    username: root
+    password: rootroot
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:

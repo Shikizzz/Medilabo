@@ -21,8 +21,8 @@ public class RiskController {
     }
 
     @GetMapping
-    public ResponseEntity getRisk(@RequestParam Integer id){
-        Risk risk = service.getRisk(id);
+    public ResponseEntity getRisk(@RequestParam Integer id, @RequestParam String token){
+        Risk risk = service.getRisk(id, token);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(risk);
     }

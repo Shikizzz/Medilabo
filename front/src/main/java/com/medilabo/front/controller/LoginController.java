@@ -30,7 +30,6 @@ public class LoginController {
             return "error";
         }
         session.setAttribute("token", service.postLogin(loginForm));
-        String test = "abc";
         return "patients.html";
     }
 }

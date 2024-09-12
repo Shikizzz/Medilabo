@@ -22,11 +22,11 @@ public class RiskService {
         this.repository = repository;
     }
 
-    public Risk getRisk(Integer id){
-        Patient patient = repository.getPatient(id);
+    public Risk getRisk(Integer id, String token){
+        Patient patient = repository.getPatient(id, token);
         Genre genre = patient.getGenre();
         int age = calculateAge(patient.getBirthdate());
-        int numberOfTerms = getNumberOfTerms(id);
+        int numberOfTerms = getNumberOfTerms(id, token);
         String patientType="";
         if(age>=30) {patientType="aged";}
         else if(genre.equals(MALE)){
@@ -41,17 +41,17 @@ public class RiskService {
                 if(numberOfTerms>=8){risk=Risk.EARLYONSET;}
                 else if (numberOfTerms>=6){risk=Risk.DANGER;}
                 else if (numberOfTerms>=2){risk=Risk.BORDERLINE;}
-                else if (numberOfTerms==0){risk=Risk.NONE;}
+                else {risk=Risk.NONE;}
                 break;
             case "youngMale":
                 if(numberOfTerms>=5){risk=Risk.EARLYONSET;}
                 else if (numberOfTerms>=3){risk=Risk.DANGER;}
-                else if (numberOfTerms==0){risk=Risk.NONE;}
+                else {risk=Risk.NONE;}
                 break;
             case "youngFemale":
                 if(numberOfTerms>=7){risk=Risk.EARLYONSET;}
                 else if (numberOfTerms>=4){risk=Risk.DANGER;}
-                else if (numberOfTerms==0){risk=Risk.NONE;}
+                else {risk=Risk.NONE;}
                 break;
         }
         return risk;
@@ -63,8 +63,8 @@ public class RiskService {
         return period.getYears();
     }
 
-    private int getNumberOfTerms(Integer id){
-        List<Note> notesWithMetadata = repository.getNotes(id);
+    private int getNumberOfTerms(Integer id, String token){
+        List<Note> notesWithMetadata = repository.getNotes(id, token);
         List<String> notes = new ArrayList<>();
         notesWithMetadata.stream().forEach(note -> notes.add(note.getContent()));
         List<String> terms = Arrays.asList(
