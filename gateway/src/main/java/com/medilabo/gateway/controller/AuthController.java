@@ -23,16 +23,4 @@ public class AuthController {
         final String jwt = jwtService.createJwtToken(authenticationRequest);
         return ResponseEntity.ok(jwt);
     }
-    @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@RequestBody CustomUser user) {
-        if (userService.findByUsername(user.getUsername()) != null) {
-            return ResponseEntity.badRequest().body("Username is already taken.");
-        }
-        userService.save(user);
-        return ResponseEntity.ok("User registered successfully.");
-    }
-    @GetMapping("/hello")
-    public String hello() {
-        return "hello";
-    }
 }
